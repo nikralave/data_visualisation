@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
     <title>Document</title>
 </head>
+
 <body>
-    <div id = "spend-chart"></div>
-    <div id = "store-chart"></div>
-    <div id = "state-chart"></div>
- <script>
-     let transactionsData = [
+    <div id="spend-chart"></div>
+    <div id="store-chart"></div>
+    <div id="state-chart"></div>
+    <script>
+        let transactionsData = [
             { "name": "Tom", "store": "ACME", "state": "NY", "spend": 100 },
             { "name": "Tom", "store": "Big Co", "state": "NY", "spend": 200 },
             { "name": "Bob", "store": "ACME", "state": "FL", "spend": 150 },
@@ -25,63 +27,58 @@
             { "name": "Alice", "store": "ACME", "state": "FL", "spend": 200 },
             { "name": "Alice", "store": "Big Co", "state": "NY", "spend": 350 },
         ];
-     
-     let ndx = crossfilter(transactionsData);
-     
-     let nameDim = ndx.dimension(dc.pluck('name'));
-     let totalSpend = nameDim.group().reduceSum(dc.pluck('spend'));
-     
-     let spendChart = dc.barChart("#spend-chart");
-     
-     spendChart
-        .width(300)
-        .height(150)
-        .dimension(nameDim)
-        .group(totalSpend)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Person")
-        .yAxis().ticks(4);
-        
-        
-    let storeDim = ndx.dimension(dc.pluck("store"));
-    let totalSpendByStore = storeDim.group().reduceSum(dc.pluck('spend'));
-     
-    let storeChart = dc.barChart("#store-chart");
-     
-     storeChart
-        .width(300)
-        .height(150)
-        .dimension(storeDim)
-        .group(totalSpendByStore)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("Store")
-        .yAxis().ticks(4);
-        
-        
-    let stateDim = ndx.dimension(dc.pluck("state"));
-    let totalSpendByState = stateDim.group().reduceSum(dc.pluck("spend"));
-     
-     let stateChart = dc.barChart("#state-chart");
-     
-     stateChart
-        .width(300)
-        .height(150)
-        .dimension(stateDim)
-        .group(totalSpendByState)
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .xAxisLabel("State")
-        .yAxis().ticks(4);
-     
-     dc.renderAll();
-     
-     
-     
-     
-     
-     
- </script>
+
+        let ndx = crossfilter(transactionsData);
+
+        let nameDim = ndx.dimension(dc.pluck('name'));
+        let totalSpend = nameDim.group().reduceSum(dc.pluck('spend'));
+
+        let spendChart = dc.barChart("#spend-chart");
+
+        spendChart
+            .width(300)
+            .height(150)
+            .dimension(nameDim)
+            .group(totalSpend)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Person")
+            .yAxis().ticks(4);
+
+
+        let storeDim = ndx.dimension(dc.pluck("store"));
+        let totalSpendByStore = storeDim.group().reduceSum(dc.pluck('spend'));
+
+        let storeChart = dc.barChart("#store-chart");
+
+        storeChart
+            .width(300)
+            .height(150)
+            .dimension(storeDim)
+            .group(totalSpendByStore)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("Store")
+            .yAxis().ticks(4);
+
+
+        let stateDim = ndx.dimension(dc.pluck("state"));
+        let totalSpendByState = stateDim.group().reduceSum(dc.pluck("spend"));
+
+        let stateChart = dc.barChart("#state-chart");
+
+        stateChart
+            .width(300)
+            .height(150)
+            .dimension(stateDim)
+            .group(totalSpendByState)
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .xAxisLabel("State")
+            .yAxis().ticks(4);
+
+        dc.renderAll();
+    </script>
 </body>
+
 </html>
